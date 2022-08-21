@@ -1,4 +1,4 @@
-FROM postgres:14.5
+FROM postgis/postgis:14-3.2
 
 ARG DB_USER
 ARG DB_PASSWORD

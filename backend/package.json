@@ -7,18 +7,26 @@
   "private": false,
   "scripts": {
     "build": "yarn tsc",
+    "knex:migrate": "knex --knexfile src/db/knex/knexfile.ts migrate:latest",
+    "knex:migrate:make": "knex --knexfile src/db/knex/knexfile.ts -x ts migrate:make",
+    "knex:migrate:rollback": "knex --knexfile src/db/knex/knexfile.ts migrate:rollback",
+    "knex:seed": "knex --knexfile src/db/knex/knexfile.ts seed:run",
     "start-dev": "tsnode server.ts",
     "start": "node build/server.js"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "knex": "^2.2.0",
+    "knex-postgis": "^0.14.3",
     "pg": "^8.7.3",
     "pg-promise": "^10.11.1",
     "typescript": "^4.7.4"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/knex": "^0.16.1",
+    "@types/knex-postgis": "^0.10.0",
     "@types/pg": "^8.6.5",
     "@types/pg-promise": "^5.4.3",
     "ts-node": "^10.9.1"

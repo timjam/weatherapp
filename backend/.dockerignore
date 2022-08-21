@@ -1,0 +1,7 @@
+node_modules
+yarn-error.log
+
+# We don't want the local build into the docker image
+# because we build the server inside image during the
+# image build
+build

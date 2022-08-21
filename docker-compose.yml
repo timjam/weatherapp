@@ -1,0 +1,39 @@
+version: "3.9"
+
+# All the services needed to run the whole stack
+services:
+
+  # The actual server that front end(s) will be connected to and request data from
+  weather_backend:
+    container_name: weather-server
+    image: weather-server
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3456:3344"
+    depends_on:
+      - weatherdb
+
+  # The backend will connect to this database server. This will be completely
+  # its own instance
+  weatherdb:
+    container_name: weather-database
+    image: weather-database
+    # Using the build context just to be able to rename the docker image
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=otherthanadmin
+      - POSTGRES_PASSWORD=secretpassword
+      - POSTGRES_DB=weatherdatadb
+      - POSTGRES_PORT=5432
+    volumes:
+      - pgdata1:/var/lib/postgresql/data
+
+# Volume mapped to database to preserve data when container is rebuilt
+volumes:
+  pgdata1: {}

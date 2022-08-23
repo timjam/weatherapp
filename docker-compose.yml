@@ -9,9 +9,14 @@ services:
     image: weather-server
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
+      args:
+        - BACKEND_PORT = 3344
     ports:
       - "3456:3344"
+    volumes:
+      - ./backend:/usr/src/app/dev
+      - ignore:/usr/src/app/dev/node_modules/
     depends_on:
       - weatherdb
 
@@ -36,4 +41,5 @@ services:
 
 # Volume mapped to database to preserve data when container is rebuilt
 volumes:
+  ignore:
   weatherdb-data: {}

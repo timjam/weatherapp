@@ -12,7 +12,8 @@
     "knex:migrate:rollback": "knex --knexfile src/db/knex/knexfile.ts migrate:rollback",
     "knex:seed": "knex --knexfile src/db/knex/knexfile.ts seed:run",
     "start-dev": "tsnode server.ts",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "watch": "nodemon src/server.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
@@ -29,6 +30,7 @@
     "@types/knex-postgis": "^0.10.0",
     "@types/pg": "^8.6.5",
     "@types/pg-promise": "^5.4.3",
+    "nodemon": "^2.0.19",
     "ts-node": "^10.9.1"
   }
 }

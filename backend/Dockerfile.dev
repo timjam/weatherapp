@@ -1,0 +1,22 @@
+FROM node:16
+
+ARG BACKEND_PORT
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn install && yarn cache clean --force
+ENV PATH=/usr/src/app/node_modules/.bin:$PATH
+
+WORKDIR /usr/src/app/dev
+COPY tsconfig.json ./
+
+COPY .env ./
+# Put unwanted files to .dockerignore
+COPY . .
+
+EXPOSE ${BACKEND_PORT}
+
+CMD ["yarn", "watch"]

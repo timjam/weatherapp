@@ -1,6 +1,7 @@
 require('ts-node/register');
+import type { Knex } from "knex"
 
-module.exports = {
+module.exports = <{ [key: string]: Knex.Config } >{
 
   development: {
     client: "postgresql",
@@ -20,6 +21,7 @@ module.exports = {
     },
     seeds: {
       directory: "./seeds"
-    }
+    },
+    timezone: "UTC"
   },
 };

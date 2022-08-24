@@ -7,12 +7,12 @@
   "private": false,
   "scripts": {
     "build": "yarn tsc",
-    "knex:migrate": "knex --knexfile src/db/knex/knexfile.ts migrate:latest",
-    "knex:migrate:make": "knex --knexfile src/db/knex/knexfile.ts -x ts migrate:make",
-    "knex:migrate:rollback": "knex --knexfile src/db/knex/knexfile.ts migrate:rollback",
-    "knex:seed": "knex --knexfile src/db/knex/knexfile.ts seed:run",
+    "knex:migrate": "knex --knexfile knex/knexfile.ts migrate:latest",
+    "knex:migrate:make": "knex --knexfile knex/knexfile.ts -x ts migrate:make",
+    "knex:migrate:rollback": "knex --knexfile knex/knexfile.ts migrate:rollback",
+    "knex:seed": "knex --knexfile knex/knexfile.ts seed:run",
     "start-dev": "tsnode server.ts",
-    "start": "node build/server.js",
+    "start-prod": "node build/server.js",
     "watch": "nodemon src/server.ts"
   },
   "dependencies": {

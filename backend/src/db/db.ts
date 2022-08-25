@@ -1,5 +1,13 @@
-import pg from "pg"
-import Knex from "knex"
-import { config } from "./knex/knexfile"
+import pgPromise from "pg-promise"
 
-const knex = Knex(config.development)
+const pgp = pgPromise()
+
+// Remove hardcoded stuff and parse from postgres string
+export const db = pgp({
+  host: "weatherdb",
+  port: 5432,
+  database: "weatherdatadb",
+  user: "otherthanadmin",
+  password: "secretpassword",
+  max: 20,
+})

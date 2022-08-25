@@ -7,6 +7,8 @@ dotenv.config()
 const app: Express = express()
 const port = process.env.BACKEND_PORT
 
+app.use(express.json())
+
 app.get("/", (req, res) => {
   res.send("Amazing weather server")
 })

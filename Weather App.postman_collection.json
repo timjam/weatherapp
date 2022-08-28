@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "179731af-238e-4607-b15a-7c4e07d5ae74",
+		"name": "Weather App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3688792"
+	},
+	"item": [
+		{
+			"name": "All data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3456/weather",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"weather"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "weather from a location",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"lon\": \"60.4500\",\n    \"lat\": \"22.2666\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3456/weather/location?format=F&limit=2",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"weather",
+						"location"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "F"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert weather data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"city\": \"Helsinki\",\n    \"lat\": \"60.1676\",\n    \"lon\": \"24.9421\",\n    \"temp\": \"7.0\",\n    \"humidity\": \"40.5\"\n  },\n  {\n    \"city\": \"Turku\",\n    \"lat\": \"60.4518\",\n    \"lon\": \"22.2666\",\n    \"temp\": \"0.0\",\n    \"humidity\": \"60.3\"\n  },\n  {\n    \"city\": \"Stockholm\",\n    \"lat\": \"59.3293\",\n    \"lon\": \"18.0686\",\n    \"temp\": \"-7.0\",\n    \"humidity\": \"37.1\"\n  },\n  {\n    \"city\": \"Oulu\",\n    \"lat\": \"65.0121\",\n    \"lon\": \"25.4651\",\n    \"temp\": \"35.0\",\n    \"humidity\": \"87.5\"\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3456/weather/location",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"weather",
+						"location"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

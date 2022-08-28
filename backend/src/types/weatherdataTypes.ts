@@ -12,18 +12,10 @@ export const Coordinate = z.string().refine(val => {
 // Coordinate type
 export type Coordinate = z.infer<typeof Coordinate>
 
-export const LocationQueryCodec = {
-  query: z.object({
-    format: z.union([z.literal("C"), z.literal("F")]).optional(),
-  }),
-  body: z.object({
-    lon: Coordinate,
-    lat: Coordinate
-  })
-}
-
 export const NonNegativeNumber = z.number().nonnegative()
 export type NonNegativeNumber = z.infer<typeof NonNegativeNumber>
+
+
 
 const numStringFormat = (precision: NonNegativeNumber, scale: NonNegativeNumber) => {
   if (precision === 0 && scale > 0) return `0.${"x".repeat(scale)}`
@@ -48,6 +40,17 @@ export const NumberString = (
       return false
   }
 }, val => ({ message: `${value} must be in format ${numStringFormat(precision, scale)}` }))
+
+export const LocationQueryCodec = {
+  query: z.object({
+    format: z.union([z.literal("C"), z.literal("F")]).optional(),
+    limit: NumberString('limit', 1,0).optional()
+  }),
+  body: z.object({
+    lon: Coordinate,
+    lat: Coordinate
+  })
+}
 
 export const LocationInputCodec = {
   body: z.array(

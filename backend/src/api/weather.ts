@@ -36,7 +36,6 @@ weatherRouter.get("/location",
     const { lon, lat } = req.body
     const { format, limit } = req.query
     const results = await getNearest(lon, lat, format, Number(limit)).catch(e => e)
-    console.log(results)
     return res.send(results)
 })
 

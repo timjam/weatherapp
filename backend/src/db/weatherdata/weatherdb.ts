@@ -13,7 +13,6 @@ export const getAll = async () => {
 const cToF = (format: string) => format === "C" ? `temperature` : `((((temperature)::float)*1.8)+32)::numeric AS temperature`
 
 export const getNearest = async (lon: Coordinate, lat: Coordinate, format: string = "C" , limit: NonNegativeNumber = 1) => {
-  console.log(lat, lon, limit)
   return db.tx(async tx => tx.any(`
     SELECT
       city, ${cToF(format)}, humidity

@@ -1,6 +1,4 @@
-import { isTemplateExpression } from "typescript"
-import { number, string } from "zod"
-import { Coordinate } from "../../types/coordinate"
+import { Coordinate } from "../../types/weatherdataTypes"
 import { db, pgp } from "../db"
 
 export const getAll = async () => {
@@ -35,8 +33,8 @@ type LocationData = {
   city: string,
   lon: Coordinate,
   lat: Coordinate,
-  temp: number,
-  humidity: number
+  temp: string,
+  humidity: string
 }
 
 export const insertLocationTempData = async (data: Array<LocationData>) => {
@@ -46,8 +44,8 @@ export const insertLocationTempData = async (data: Array<LocationData>) => {
       lat: d.lat,
       lon: d.lon
     },
-    temp: d.temp,
-    humidity: d.humidity
+    temp: parseFloat(d.temp),
+    humidity: parseFloat(d.humidity)
   }))
   const values = pgp.helpers.values(tData, weatherDataSet)
   return db.tx(async tx => tx.many(`

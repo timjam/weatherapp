@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { getAll, getNearest, insertLocationTempData } from "../db/weatherdata/weatherdb"
-import { LocationQueryCodec, LocationInputCodec } from "../types/coordinate"
+import { LocationQueryCodec, LocationInputCodec } from "../types/weatherdataTypes"
 import { validateRequest } from "zod-express-middleware"
 
 export const weatherRouter = Router()
@@ -22,7 +22,7 @@ weatherRouter.get("/location",
 weatherRouter.post("/location",
   validateRequest(LocationInputCodec),
   async (req, res, next) => {
-    const results = await insertLocationTempData(req.body)
+    const results = await insertLocationTempData(req.body).catch(e => e)
     return res.send(results)
   }
 )

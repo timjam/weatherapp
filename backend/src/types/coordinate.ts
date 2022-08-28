@@ -11,3 +11,24 @@ export const Coordinate = z.string().refine(val => {
 
 // Coordinate type
 export type Coordinate = z.infer<typeof Coordinate>
+
+export const LocationQueryCodec = {
+  query: z.object({
+    format: z.union([z.literal("C"), z.literal("F")]).optional(),
+  }),
+  body: z.object({
+    lon: Coordinate,
+    lat: Coordinate
+  })
+}
+
+export const LocationInputCodec = {
+  body: z.array(
+    z.object({
+      city: z.string(),
+      lat: Coordinate,
+      lon: Coordinate,
+      temp: z.number(),
+      humidity: z.number(),
+    })
+  )}

@@ -1,6 +1,6 @@
 import pgPromise from "pg-promise"
 
-const pgp = pgPromise()
+export const pgp = pgPromise()
 
 // Remove hardcoded stuff and parse from postgres string
 export const db = pgp({

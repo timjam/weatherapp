@@ -8,13 +8,15 @@ export async function up(knex: Knex): Promise<void> {
     CREATE EXTENSION IF NOT EXISTS postgis;
     `
   ).then(() => {
-    return knex.schema.createTable("weatherdata", (table) => {
-      table.increments("id").primary()
-      table.string("city", 255).notNullable()
-      table.specificType("coordinates", "geometry(point, 4326)")
-      table.float("temperature")
-      table.float("humidity")
-    })
+    return knex.raw(`
+      CREATE TABLE IF NOT EXISTS weatherdata (
+        id          uuid DEFAULT gen_random_uuid() NOT NULL PRIMARY KEY,
+        city        CHAR(255) NOT NULL,
+        coordinates geometry(POINT, 4326),
+        temperature NUMERIC,
+        humidity    NUMERIC
+      );
+    `)
   })
 }
 

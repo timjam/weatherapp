@@ -14,8 +14,9 @@ weatherRouter.get("/location",
   validateRequest(LocationQueryCodec),
   async (req, res, next) => {
     const { lon, lat } = req.body
-    const { format } = req.query
-    const results = await getNearest(lon, lat, format).catch(e => e)
+    const { format, limit } = req.query
+    const results = await getNearest(lon, lat, format, Number(limit)).catch(e => e)
+    console.log(results)
     return res.send(results)
 })
 

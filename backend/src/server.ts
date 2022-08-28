@@ -1,6 +1,6 @@
 import express, { Express } from "express"
 import dotenv from "dotenv"
-import { weatherRouter } from "./routes/weather"
+import { weatherRouter } from "./api/weather"
 
 dotenv.config()
 

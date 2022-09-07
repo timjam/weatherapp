@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import { weatherRouter } from "./api/weather"
 import http from "http"
 import socketIO, { Socket } from "socket.io"
+import { locationRouter } from "./api/locationSocketApi"
 
 dotenv.config()
 
@@ -15,7 +16,7 @@ const server = http.createServer(app)
 export const io = new socketIO.Server(server, {
   transports: ["polling"],
   cors: {
-    origin: `http://localhost:${port}`
+    origin: `http://localhost:3000`
   }
 })
 
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/weather", weatherRouter)
+app.use("/location", locationRouter)
 
 server.listen(port, () => {
   console.log(`Server running on port ${port}`)
